@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    # Добавьте настройки базы данных
+
+  redis:
+    image: redis:latest
+    # Добавьте настройки Redis
+
+  users:
+    build:
+      context: ./users
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  products:
+    build:
+      context: ./products
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+      - redis
